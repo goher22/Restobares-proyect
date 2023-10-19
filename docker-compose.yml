@@ -1,24 +1,44 @@
-version: '1'
+version: '2'
 services:
-  nodejs-express:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    depends_on:
-      - mongo
-    links:
-      - mongo
   mongo:
     image: mongo
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=goher
-      - MONGO_INITDB_ROOT_PASSWORD=Cigoher22
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
     volumes:
       - mongo-data:/data/db
+    networks:
+      - mynetwork
+
+  backend:
+    build:
+      context: ./Restobares-Backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8000"
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      - mynetwork
+
+  frontend:
+    build: 
+      context: ./Restobares-Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:4200" # Cambia el puerto en el host si es necesario
+    networks:
+      - mynetwork
+    depends_on:
+      - backend
+
+networks:
+  mynetwork:
+
 volumes:
   mongo-data:
 
