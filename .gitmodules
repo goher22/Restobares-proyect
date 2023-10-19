@@ -1,0 +1,6 @@
+[submodule "Restobares-Backend"]
+	path = Restobares-Backend
+	url = https://github.com/goher22/Restobares-Backend.git
+[submodule "Restobares-Frontend"]
+	path = Restobares-Frontend
+	url = https://github.com/goher22/Restobares-Frontend.git
