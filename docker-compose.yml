@@ -30,7 +30,7 @@ services:
       context: ./Restobares-Frontend
       dockerfile: Dockerfile
     ports:
-      - "8000:4200" # Cambia el puerto en el host si es necesario
+      - "8000:80" # Cambia el puerto en el host si es necesario
     networks:
       - mynetwork
     depends_on:
